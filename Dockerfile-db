@@ -1,0 +1,15 @@
+ARG VERSION=latest
+FROM mariadb:${VERSION}
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends nano && \
+# Set the default collation
+    echo '[mysqld]' >> /etc/mysql/mariadb.conf.d/custom.cnf && \
+    echo 'character-set-server=utf8mb4' >> /etc/mysql/mariadb.conf.d/custom.cnf && \
+    echo 'collation-server=utf8mb4_unicode_ci' >> /etc/mysql/mariadb.conf.d/custom.cnf && \
+    echo 'character_set_server=utf8mb4' >> /etc/mysql/mariadb.conf.d/custom.cnf && \
+    echo 'collation_server=utf8mb4_unicode_ci' >> /etc/mysql/mariadb.conf.d/custom.cnf && \
+# Set aliases
+    echo "alias ls='ls --color=auto -lAhF'" >> /root/.bashrc
+
+WORKDIR /var/lib/mysql

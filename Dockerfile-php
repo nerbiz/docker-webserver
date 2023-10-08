@@ -1,0 +1,75 @@
+# Use '8.2-apache' format for other versions
+ARG VERSION=apache
+FROM php:${VERSION}
+
+COPY copyable/adminer /etc/adminer
+COPY copyable/apache-aliases /tmp/apache-aliases
+COPY copyable/config/.nanorc /root
+COPY copyable/config/php.ini /usr/local/etc/php
+COPY copyable/config/PS1.txt /tmp
+COPY copyable/helpers /var/www/helpers
+COPY copyable/startup /tmp/startup
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+# Install system dependencies
+    git nano wget unzip libzip-dev default-mysql-client zlib1g-dev libpng-dev libonig-dev libexif-dev libicu-dev ssl-cert gettext ca-certificates gnupg \
+# Install external PHP extension dependencies
+    libmagickwand-dev imagemagick libssl-dev libz-dev libmemcached-dev memcached && \
+# Install PHP extensions
+    docker-php-ext-install zip mysqli pdo pdo_mysql gd mbstring fileinfo bcmath exif intl && \
+# Install external PHP extensions
+    pecl install imagick memcached && \
+    docker-php-ext-enable imagick memcached && \
+# Make some files executable
+    chmod +x /tmp/apache-aliases/* && \
+    chmod +x /tmp/startup/* && \
+# Install Mailpit
+    curl -sL https://raw.githubusercontent.com/axllent/mailpit/develop/install.sh | bash - && \
+# Install Adminer
+    curl -L https://www.adminer.org/latest.php -o /etc/adminer/adminer.php && \
+    curl -L https://raw.githubusercontent.com/pepa-linha/Adminer-Design-Dark/master/adminer.css -o /etc/adminer/adminer.css && \
+    curl -L https://raw.githubusercontent.com/vrana/adminer/master/plugins/plugin.php -o /etc/adminer/plugins/plugin.php && \
+# Install phpMyAdmin
+    curl -L https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-english.tar.gz -o /tmp/phpmyadmin.tar.gz && \
+    mkdir -p /etc/phpmyadmin/tmp && \
+    tar -xf /tmp/phpmyadmin.tar.gz --strip-components=1 -C /etc/phpmyadmin && \
+    chown www-data:www-data /etc/phpmyadmin/tmp && \
+    cp /etc/phpmyadmin/config.sample.inc.php /etc/phpmyadmin/config.inc.php && \
+    rm /tmp/phpmyadmin.tar.gz && \
+# Set Apache URL aliases
+    /tmp/apache-aliases/alias-adminer.py && \
+    /tmp/apache-aliases/alias-pma.py && \
+    a2enconf aliases && \
+# Install Composer
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+# Install WordPress CLI
+    curl -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/local/bin/wp && \
+    chmod +x /usr/local/bin/wp && \
+# Install Node.js (NPM included)
+    mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update && \
+    apt-get install -y nodejs && \
+# Install Yarn
+    npm install --global yarn && \
+# Configure Bash
+    echo "alias ls='ls --color=auto -lAhF'" >> /root/.bashrc && \
+    echo "alias mailpit='mailpit --ui-tls-cert /etc/ssl/certs/ssl-cert-snakeoil.pem --ui-tls-key /etc/ssl/private/ssl-cert-snakeoil.key'" >> /root/.bashrc && \
+    cat /tmp/PS1.txt >> /root/.bashrc && \
+# Set the document root directory as a symlink
+    mkdir -p /var/www/site && \
+    rm -r /var/www/html && \
+    ln -s /var/www/site /var/www/html && \
+# Enable Apache mods
+    a2enmod ssl rewrite headers expires && \
+# Enable default HTTPS site
+    a2ensite default-ssl.conf && \
+# Remove package lists
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /var/www/site
+
+# Ports for HTTP, HTTPS, Vite server, Mailpit UI
+EXPOSE 80 443 5173 8025

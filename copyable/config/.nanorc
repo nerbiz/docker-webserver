@@ -1,0 +1,6 @@
+# Use 4 spaces instead of tabs
+set tabsize 4
+set tabstospaces
+
+# Show line numbers in files
+#set linenumbers

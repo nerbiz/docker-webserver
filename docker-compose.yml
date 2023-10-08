@@ -1,0 +1,40 @@
+version: '3'
+services:
+  db:
+    build:
+      # Linux/macOS: context: "~/Dockerfiles"
+      context: "C:\\Dockerfiles"
+      dockerfile: Dockerfile-db
+    image: dbserver
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - webdev
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  php:
+    build:
+      # Linux/macOS: context: "~/Dockerfiles"
+      context: "C:\\Dockerfiles"
+      dockerfile: Dockerfile-php
+    image: phpserver
+    ports:
+      - "80:80"
+      - "443:443"
+      - "5173:5173"
+      - "8025:8025"
+    volumes:
+      - .:/var/www/site
+    networks:
+      - webdev
+    command: ["/bin/sh", "-c", "/tmp/startup/symlink-public.py && /tmp/startup/db-config.py ${COMPOSE_PROJECT_NAME}-db-1 && apache2-foreground"]
+
+networks:
+  webdev:
+    driver: bridge
+
+volumes:
+  db-data:
+    name: db-data
