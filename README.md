@@ -8,6 +8,8 @@ Download or clone this repo somewhere.
 
 In `docker-compose.yml`, the values are 'C:\docker-webserver' (Windows) and '~/docker-webserver' (Linux/macOS), so if you use a different directory, change `docker-compose.yml` accordingly.
 
+Set the right context values in `docker-compose.yml`, according to your operating system.
+
 ### Windows
 
 ```sh
