@@ -9,7 +9,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db-data:/var/lib/mysql
+      - dbdata:/var/lib/mysql
     networks:
       - webdev
     environment:
@@ -38,5 +38,5 @@ networks:
     driver: bridge
 
 volumes:
-  db-data:
-    name: db-data
+  dbdata:
+    name: dbdata
