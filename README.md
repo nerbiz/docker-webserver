@@ -34,7 +34,7 @@ The compose file creates these:
 * Networks
     * webdev
 
-The volume has a fixed name ('dbdata'), because the database data is intended for reuse across projects. Names for containers and network are dynamic based on your project directory name. Change any of these names if needed.
+The volume has a fixed name ('dbdata'), because the database volume is intended for reuse across projects. Names for containers and network are dynamic based on your project directory name. Change any of these names if needed.
 
 ## Using
 
