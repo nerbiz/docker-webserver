@@ -45,6 +45,8 @@ Copy the `docker-compose.yml` file to your project directory and run it:
 docker compose up -d
 ```
 
+**Please note:** The first time 'up' takes a while, because the images need to be built first. After that, it's much faster.
+
 To stop/remove the containers:
 
 ```sh
