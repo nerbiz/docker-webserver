@@ -19,7 +19,7 @@ git clone https://github.com/nerbiz/docker-webserver
 ```sh
 cd ~
 git clone https://github.com/nerbiz/docker-webserver
-``
+```
 
 ## Naming
 
