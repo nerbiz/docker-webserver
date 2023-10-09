@@ -2,8 +2,8 @@ version: '3'
 services:
   db:
     build:
-      # Linux/macOS: context: "~/Dockerfiles"
-      context: "C:\\Dockerfiles"
+      # Linux/macOS: context: "~/docker-webserver"
+      context: "C:\\docker-webserver"
       dockerfile: Dockerfile-db
     image: dbserver
     ports:
@@ -16,15 +16,17 @@ services:
       MYSQL_ROOT_PASSWORD: root
   php:
     build:
-      # Linux/macOS: context: "~/Dockerfiles"
-      context: "C:\\Dockerfiles"
+      # Linux/macOS: context: "~/docker-webserver"
+      context: "C:\\docker-webserver"
       dockerfile: Dockerfile-php
     image: phpserver
     ports:
-      - "80:80"
-      - "443:443"
-      - "5173:5173"
-      - "8025:8025"
+      - "80:80" # HTTP connection
+      - "443:443" # HTTPS connection
+      - "3000:3000" # Node.js port
+      - "5173:5173" # Vite dev server
+      - "8000:8000" # Laravel port
+      - "8025:8025" # Mailpit web UI
     volumes:
       - .:/var/www/site
     networks:
