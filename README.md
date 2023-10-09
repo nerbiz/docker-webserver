@@ -52,3 +52,5 @@ To stop/remove the containers:
 # not the volume
 docker compose down
 ```
+
+After running it, http://localhost should be working (also https://localhost). Some useful ports are included, you can find them in `docker-compose.yml`.
