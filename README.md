@@ -35,7 +35,12 @@ The compose file creates these things:
 * Networks
     * webdev
 
-If your project directory is 'tester', the volume will be 'tester_dbdata' and network will be 'tester_webdev'.
+If your project directory is 'tester', these will be the resulting names:
+
+* Volume: tester_dbdata
+* Network: tester_webdev
+* Database container: tester-db-1
+* Apache/PHP container: tester-php-1
 
 ## Using
 
@@ -47,6 +52,22 @@ docker compose up -d
 ```
 
 **Please note:** The first time 'up' takes a while, because the images need to be built first. After that, it's much faster.
+
+If you need to run commands inside the PHP container, you can open a terminal with this command:
+
+```sh
+# Replace 'tester-php-1' with your container name
+docker exec -it tester-php-1 bash
+```
+
+For example, if you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can do this:
+
+```sh
+# Do this inside your container
+cd /var/www
+rm html
+ln -s /var/www/site/public /var/www/html
+```
 
 To stop/remove the containers:
 

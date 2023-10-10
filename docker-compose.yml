@@ -35,7 +35,7 @@ services:
       - .:/var/www/site
     networks:
       - webdev
-    command: ["/bin/sh", "-c", "/tmp/startup/symlink-public.py && /tmp/startup/db-config.py ${COMPOSE_PROJECT_NAME}-db-1 && apache2-foreground"]
+    command: ["/bin/sh", "-c", "/tmp/startup/db-config.py ${COMPOSE_PROJECT_NAME}-db-1 && apache2-foreground"]
 
 networks:
   webdev:
