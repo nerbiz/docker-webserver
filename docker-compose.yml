@@ -2,7 +2,9 @@ version: '3'
 services:
   db:
     build:
-      # Linux/macOS: context: "~/docker-webserver"
+      # Linux/macOS:
+      # context: "~/docker-webserver"
+      # Windows:
       context: "C:\\docker-webserver"
       dockerfile: Dockerfile-db
     image: dbserver
@@ -16,7 +18,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
   php:
     build:
-      # Linux/macOS: context: "~/docker-webserver"
+      # Linux/macOS:
+      # context: "~/docker-webserver"
+      # Windows:
       context: "C:\\docker-webserver"
       dockerfile: Dockerfile-php
     image: phpserver
