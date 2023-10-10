@@ -56,4 +56,30 @@ To stop/remove the containers:
 docker compose down
 ```
 
-After running it, http://localhost should be working (also https://localhost). Some useful ports are included, you can find them in `docker-compose.yml`.
+After running it, http://localhost should be working (also https://localhost).
+
+## What's included
+
+* A MariaDB database server at port 3306
+* An Apache + PHP server
+    * Apache mods: rewrite, headers, expires
+    * Both http://localhost and https://localhost available
+    * Container is mapped to /var/www/site
+    * Document root is /var/www/html, which is a symlink to /var/www/site
+    * Gettext for translating strings
+    * PHP extensions: zip mysqli, pdo, pdo_mysql, gd, mbstring, fileinfo, bcmath, exif, intl
+    * Extra PHP extensions: imagick, memcached
+    * Backend tools: Mailpit, Adminer, phpMyAdmin, Composer, WordPress CLI
+    * Frontend tools: Node.js, NPM, Yarn
+    * Git
+    * Nano
+    * Aliases:
+        * ls: ls --color=auto -lAhF
+        * mailpit: starts the Mailpit service
+    * Ports:
+        * 80: HTTP connection
+        * 443: HTTPS connection
+        * 3000: Node.js port
+        * 5173: Vite dev server
+        * 8000: Laravel port
+        * 8025: Mailpit web UI
