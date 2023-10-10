@@ -25,7 +25,8 @@ git clone https://github.com/nerbiz/docker-webserver
 
 ## Naming
 
-The compose file creates these:
+The compose file creates these things:
+
 * Images
     * dbserver
     * phpserver
@@ -34,7 +35,7 @@ The compose file creates these:
 * Networks
     * webdev
 
-The volume has a fixed name ('dbdata'), because the database volume is intended for reuse across projects. Names for containers and network are dynamic based on your project directory name. Change any of these names if needed.
+If your project directory is 'tester', the volume will be 'tester_dbdata' and network will be 'tester_webdev'.
 
 ## Using
 
