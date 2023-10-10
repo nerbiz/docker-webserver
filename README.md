@@ -2,6 +2,8 @@
 
 Docker files for running PHP and MySQL servers.
 
+This is intended for people who have used services like XAMPP, but have never worked with Docker before.
+
 ## Installation
 
 Download or clone this repo somewhere.
@@ -34,6 +36,9 @@ The compose file creates these things:
     * dbdata
 * Networks
     * webdev
+* Containers
+    * [project-name]-db-1
+    * [project-name]-php-1
 
 If your project directory is 'tester', these will be the resulting names:
 
@@ -52,6 +57,8 @@ docker compose up -d
 ```
 
 **Please note:** The first time 'up' takes a while, because the images need to be built first. After that, it's much faster.
+
+When it's done, go to [https://localhost](https://localhost).
 
 If you need to run commands inside the PHP container, you can open a terminal with this command:
 
