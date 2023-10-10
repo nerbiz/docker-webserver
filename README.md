@@ -60,13 +60,13 @@ If you need to run commands inside the PHP container, you can open a terminal wi
 docker exec -it tester-php-1 bash
 ```
 
-For example, if you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can do this:
+For example, if you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can replace the `html` symlink:
 
 ```sh
 # Do this inside your container
 cd /var/www
 rm html
-ln -s /var/www/site/public /var/www/html
+ln -s /var/www/site/public html
 ```
 
 To stop/remove the containers:
