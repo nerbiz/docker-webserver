@@ -60,7 +60,7 @@ docker compose up -d
 
 **Please note:** The first time 'up' takes a while, because the images need to be built first. After that, it's much faster.
 
-When it's done, go to [https://localhost](https://localhost).
+After running it, http://localhost should be working (also https://localhost).
 
 If you need to run commands inside the PHP container, you can open a terminal with this command:
 
@@ -91,8 +91,6 @@ To remove the containers:
 # not the volume
 docker compose down
 ```
-
-After running it, http://localhost should be working (also https://localhost).
 
 ## What's included
 
