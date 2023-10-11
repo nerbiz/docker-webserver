@@ -51,6 +51,8 @@ If your project directory is 'tester', these will be the resulting names:
 
 Copy the `docker-compose.yml` file to your project directory and run it:
 
+### Starting
+
 ```sh
 # The -d makes it run in the background
 docker compose up -d
@@ -76,7 +78,13 @@ rm html
 ln -s /var/www/site/public html
 ```
 
-To stop/remove the containers:
+### Stopping / restarting
+
+To stop/start the containers, go to Containers in Docker Desktop and click the button under Actions.
+
+### Removing
+
+To remove the containers:
 
 ```sh
 # This removes the containers and the network,
@@ -92,7 +100,7 @@ After running it, http://localhost should be working (also https://localhost).
 * An Apache + PHP server
     * Apache mods: rewrite, headers, expires
     * Both http://localhost and https://localhost available
-    * Container is mapped to /var/www/site
+    * Container is mounted to /var/www/site
     * Document root is /var/www/html, which is a symlink to /var/www/site
     * Gettext for translating strings
     * PHP extensions: zip mysqli, pdo, pdo_mysql, gd, mbstring, fileinfo, bcmath, exif, intl
