@@ -62,6 +62,8 @@ docker compose up -d
 
 After running it, http://localhost should be working (also https://localhost).
 
+**Important:** The database host is not 'localhost', but the name of the database container ('tester-db-1' in the above example).
+
 If you need to run commands inside the PHP container, you can open a terminal with this command:
 
 ```sh
@@ -78,19 +80,9 @@ rm html
 ln -s /var/www/site/public html
 ```
 
-### Stopping / restarting
+### Stopping / restarting / removing
 
-To stop/start the containers, go to Containers in Docker Desktop and click the button under Actions.
-
-### Removing
-
-To remove the containers:
-
-```sh
-# This removes the containers and the network,
-# not the volume
-docker compose down
-```
+To stop/start or remove the containers, go to Containers in Docker Desktop and click the right button under Actions.
 
 ## What's included
 
