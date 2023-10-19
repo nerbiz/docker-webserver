@@ -4,6 +4,8 @@ Docker files for running PHP and MySQL servers.
 
 This is intended for people who have used services like XAMPP, but have never worked with Docker before.
 
+[Docker Desktop](https://www.docker.com/get-started/) needs to be installed and running.
+
 ## Installation
 
 Download or clone this repo somewhere.
