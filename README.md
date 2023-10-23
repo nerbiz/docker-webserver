@@ -71,9 +71,12 @@ If you need to run commands inside the PHP container, you can open a terminal wi
 ```sh
 # Replace 'tester-php-1' with your container name
 docker exec -it tester-php-1 bash
+
+# For instance, you can do this inside your container to serve a Laravel project
+php artisan serve
 ```
 
-For example, if you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can replace the `html` symlink:
+If you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can replace the `html` symlink:
 
 ```sh
 # Do this inside your container
