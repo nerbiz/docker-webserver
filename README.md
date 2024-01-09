@@ -73,7 +73,8 @@ If you need to run commands inside the PHP container, you can open a terminal wi
 docker exec -it tester-php-1 bash
 
 # For instance, you can do this inside your container to serve a Laravel project
-php artisan serve
+# The default 127.0.0.1 doesn't work with a container, because it's local to the container
+php artisan serve --host=0.0.0.0
 ```
 
 If you use Laravel and you want to make the `public` directory the document root (so that https://localhost points to the `public` directory), you can replace the `html` symlink:
