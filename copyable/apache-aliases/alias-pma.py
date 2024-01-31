@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-contents = """Alias /phpMyAdmin "/etc/phpmyadmin"
+contents = """Alias /phpmyadmin "/etc/phpmyadmin"
 
 <Directory "/etc/phpmyadmin">
     Options FollowSymlinks
